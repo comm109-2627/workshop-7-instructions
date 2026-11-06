@@ -63,6 +63,14 @@ user_input = input("Press enter to quit")
 clear()
 ```
 
+Run the code by typing the following into the terminal prompt:
+
+```
+python w7_part1.py
+```
+
+Look through the code and check you understand how it works:
+
 What does the `clear()` function do?
 
 What do the `print()` lines do?
