@@ -22,7 +22,7 @@ Coding Activity Markdown
 
 ### Task 1
 
-Run the example code in file `w7_part1.py`
+Create a code file named `w7_part1.py` and copy in the code below:
 
 ```python
 import time
