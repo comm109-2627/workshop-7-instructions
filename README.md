@@ -1,4 +1,4 @@
-# Python Week 5 Workshop
+# Python Week 7 Workshop
 
 ---
 
@@ -18,279 +18,245 @@ https://github.com/phil-lewis-exe/PythonCheatSheets
 
 ---
 
-## TASKS
+Coding Activity Markdown
 
+### Task 1
 
-### Part 1: Rolling Dice
-
-Work in code file `5_part1.py`
-
-This contains starter code that:
-
- - defines a function to simulate a dice roll. 
- - demonstrates how to call this function to roll a dice, storing the dice roll as variable `x1` then displaying the result.
+Run the example code in file `w7_part1.py`
 
 ```python
-# library to generate random numbers
-import random
+import time
+import os
 
-def roll_one_dice():
-    n_sides = 6
-    roll = random.randint(1,n_sides)
-    return roll
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-x1 = roll_one_dice()
-print(f"The result of the 1st call to roll_one_dice() was: {x1}")
+
+clear()
+
+print("***** Welcome to the True or False quiz ******")
+print()
+user_input = input("Press enter to continue")
+
+clear()
+
+print("*** Q1 ***\n")
+print("T/F: 2 + 2 = 5")
+print()
+
+ans = input("Enter T or F: ")
+ans = ans.upper()
+
+print("checking...")
+print()
+
+time.sleep(0.4)
+
+if ans == "F":
+    print("You were right!")
+else:
+    print("Sorry, incorrect.")
+
+print()
+
+user_input = input("Press enter to quit")
+clear()
 ```
 
-**Task 1.1**
+What does the `clear()` function do?
 
-Add code that runs the function again, storing the result as `x2` and that shows the output using a message like:
+What do the `print()` lines do?
 
-```
-The result of the 2nd call to roll_one_dice() was: ...
-```
+What does the `\n` at the end of print("*** Q1 ***\n") do?
 
-Run the program three times. What do you notice?
+What does `time.sleep(0.4)` do?
 
-**Task 1.2**
+What does line `ans = ans.upper()` do?
 
-Directly below the definition for `roll_one_dice` (above the line `x1 = ...`) write the function `roll_n_dice`. 
+To investigate in each case you can try running the code 
+after commenting out or changing the code line.
 
-This should take a single argument `n_dice` that determines how many dice are being rolled.
+#### Task 1A
 
-You can adapt the code above, but start by defining an empty list `rolls`, then using a `for` loop to fill the list with the right amount of dice rolls (as stored in `n_dice`).
+At the moment what happens if the user presses a key other than "T" or "F"?
 
-Once you have written your function, add the following lines of code to the end of your program to test it.
+Move the code that takes the answer (see below) into a loop:
 
 ```python
-x3 = roll_n_dice(3)
-print(f"The result of roll_n_dice(3) was: {x3}")
+ans = input("Enter T or F: ")
+ans = ans.upper()
 ```
 
-**Task 1.3**
+Your loop should keep asking for input, until a valid answer has been given.
 
-Restructure and change the function `roll_n_dice` so that `n_dice` will take a default value of 2 if not provided.
+#### Task 1B
 
-Add a call to demonstrate this function working (storing the result in `x4`) and using a suitable message to show the result.
-
-**Task 1.4**
-
-Now change the function so it takes the two arguments `n_dice` and `n_sides` (e.g. an 8 sided dice can return values 1-8)
-
-If not provided `n_sides` will take a default value of 6.
-
-At the bottom of the code add additional demonstrations storing the results as `x5` `x6` and `x7` displaying the results in each case:
-
-`x5` : shows how to call the function without specifying arguments (so that the default values are used).
-
-`x6` : shows how to call the function to roll three 10 sided dice
-
-`x7` : shows how to call the function to roll four dice with 8 sides, specifying the arguments in reverse order 
-
-(i.e. the values must be passed in the order `n_sides` then `n_dice` as keyword arguments).
+Customise your quiz with your own messages that welcome the player and  
+tell them their result.
 
 
+### Task 2
 
----
+We want to be able to run the quiz with multiple questions.
 
-### Part 2: Functions with any number of arguments
-
-Work in code file `5_part2.py`
-
-Start with the following code that demonstrates a way to check items in a list to identify the highest value it contains.
-
-You have to work out what code goes into the `???` that has been left for you to complete.
+One way to do this is to store both the question and answer within a dictionary.
 
 ```python
-def max_value_in_list(my_values):
-    current_max = None
-    print("start of loop")
-
-    for item in my_values:
-        print(f"running loop with item: {item} and current_max: {current_max}")
-        if current_max is None:
-            current_max = item
-        elif item ??? current_max: # complete this line
-            current_max = item
-
-    print("end of loop")
-    print(f"current_max: {current_max}")
-
-    return current_max
-
-demo1 = max_value_in_list([4,2,8,1,9])
-print(f"result of call to max_value_in_list was: {demo1}")
+q1_dict = {
+    'question': ...
+    'answer': ...
+}
 ```
 
-**Task 2.1**
+Copy your code into new file `w7_task2.py` and edit to add code that sets up `q1_dict` after the imports and function definitions.
 
-Write a new function `max_value()` which can take any number of input values as arguments, i.e. be called using
+Then edit the code so that the question text is taken from the dictionary, 
+and the answer is compared with the stored answer.
+
+### Task 3
+
+A quiz game should be able to ask more that one question. To store multiple questions
+we can define a list storing several question dictionaries:
 
 ```python
-max_value( 4, 2, 8, 1, 9 )  # uses individual values instead of list
+q_list = [  {    'question': ... , 'answer': ... },
+            {    'question': ... , 'answer': ... },
+            {    'question': ... , 'answer': ... }  ]
 ```
 
-**Hint** You should need to change two lines.
+Copy your code into new file `w7_task3.py` and edit to replace the line that
+sets up a single `q_dict` with the code setting up `q_list`.
 
- - the function definition line needs to accept any number of arguments
- - the line `for item in my_values:` needs updating to refer to the input arguments instead of iterating over list `my_values`.
+Set up three questions of your own.
 
-When the code is working, remove any `print()` statements so the function will run and return the result without displaying any messages.
+Put the entire code that asks the question and checks the answer into a loop,
+that runs over the questions in `q_list` and asks them one by one, telling you 
+if you are correct or incorrect each time.
 
-To demonstrate add the following additional code examples to show your function works correctly in each case: 
+### Task 4
+
+Copy your code into new file `w7_task4.py`.
+
+We want to be able to record the score of someone playing the game.
+
+#### Task 4A
+
+Start by adding code to set up a `score` variable after the `q_list` is defined.
+
+What should the initial value for `score` be?
+
+Make sure that each time the code checks an answer, the score is updated as appropriate.
+(+1 point for a correct answer).
+
+At the end of the game display a message: `"You scored ___"`
+
+#### Task 4B
+
+Now change the code so that it tells you your score as a percentage (1 d.p.).
+
+Hint. to do this you can compare the score with the number of questions in the list.
+
+Add code to give an appropriate message based on the % score
+(you can pick your own messages and boundaries).
+
+e.g. 
+
+ - below 33% `"...that was terrible."`
+ - below 67% `"...that was weak."`
+ - below 100% `...pretty good!"`
+ - exactly 100% `"...Perfect!"`
+
+### Task 5
+
+We now have a working quiz. Let's see how we can restructure the code
+using functions.
+
+Copy your code into new file `w7_task5.py`.
+
+Suppose we decide to create the following functions. 
+
+Before writing each function think about what input argument(s) it should
+take and what information it needs to return: 
+
+ - `ask_question()`: asks a single question
+  
+ - `get_ans()`: takes an answer from a user, ensuring it is valid
+
+ - `display_result()`: displays final score and the result message 
+
+### Task 6
+
+#### Task 6A
+
+Put the whole code that runs a round of the game into function:
+
+`play_game()`: plays a full game of the True / False game.
+
+Then make a `main()` function that runs the program by calling `play_game()`
 
 ```python
-demo2 = max_value(99)
-print(f"result of call to max_value with 99 was: {demo2}")
-
-demo3 = max_value(2,99)
-print(f"result of call to max_value with 2,99 was: {demo3}")
-
-demo4 = max_value(6,8,3)
-print(f"result of call to max_value with 6,8,3 was: {demo4}")
+def main():
+    play_game()
 ```
 
-**Task 2.2**
-
-In this task we will write a function `max_length` that has arguments which will accept a variable number of words, then return the length of the longest word.
-
-Start by copying and renaming the `max_value` function to `max_length`, (you should place this directly below the existing `max_value()` function).
-
-You can reuse the same code structure but adapt where needed so that the lengths of words are compared, instead of the size of the values.
-
-(You can assume all arguments passed to the function will be valid Python strings).
-
-Test your function by using the code below.
+At the bottom of your code file put:
 
 ```python
-demo5 = max_length("cat","beetles","dogs")
-print(f"result of call to max_length with: cat beetles dogs was {demo5}")
+if __name__ == "__main__":
+    main()
 ```
 
-**Task 2.3**
+This is a common convention in Python. 
 
-Write the following code examples to show your function works correctly in each case: 
+The `__name__` is a special Python variable that stores whether 
+the file is being used as the **main** program or has been imported 
+as a Python module.
 
-```
-demo6 : run the function with the single word "cats"
+Suppose our game was stored in file `quiz.py` you run `python quiz.py` and Python runs code from the file
+the `__name__` variable will be set to `__main__`.
 
-demo7 : run the function with the two words "cats" and "dogs"
-
-demo8 : run the function with the words "mouse" "cat" "apple" "banana" and "enormous"
-```
-
----
-
-
-### Part 3: Processing a string to make replacements
-
-Work in code file `5_part3.py`
-
-This contains the following starter code that defines a function `process_str_v1`.
-
-You have to work out what code goes into the `???` that has been left for you to complete.
+However suppose we were using the code within another file via an import.
 
 ```python
-def process_str_v1(mystr, target1, replacement1, target2, replacement2):
-    task_dict = {target1: replacement1,
-                 target2: replacement2}
-
-    print(f"task_dict stores: {task_dict}")
-    print("starting loop")
-    for key, value in ???: # complete this line
-        target = key
-        replacement = value
-        print(f"mystr is now: {mystr}")
-        print(f" ( replacing {target} with {replacement} ) ")
-        mystr = mystr.replace(target, replacement)
-
-    print("ended loop")
-    print(f"mystr is: {mystr}")
-    return mystr
-
-demo1 = process_str_v1("The cat sat on the red mat.", "cat", "dog", "red", "blue" )
-print(demo1)
+from quiz import get_ans
 ```
 
-This is set up to take arguments:
+In this case when any code in the file executes `__name__` 
+is set to the module name in this case `quiz`.
 
- - `mystr` that contains a text string to process
- - `target1` a word to replace
- - `replacement1` the word to use when replacing `target1`
- - `target2` a word to replace
- - `replacement2` the word to use when replacing `target2`
-   
-It then demonstrates how to call this function, stores the value returned in variable `demo1` and displays the result.
-
-**Task 3.1**
-
-Add another demonstration of the function that will take in the string `Exams can be very stressful!!!` and replace `Exams` with `Coding` and `stressful` with `easy`, store the result in `demo2` and display the result.
-
-**Task 3.2**
-
-Write a new function `process_str_v2` which will work with any set of target and replacement pairs passed as an arbitrary number of keyword arguments `kwargs`. 
-
-i.e. to carry out the original string replacement we would run:
+The following code acts as a guard, so we can specify code to run only
+when the file is executed, but that will not run when Python loads the file
+as an imported module: 
 
 ```python
-demo3 = process_str_v2("The cat sat on the red mat.", cat="dog", red="blue")
-print(demo3)
+# check if file is being run as main program
+if __name__ == "__main__":
+    # if so run the code in the main function
+    main()
 ```
 
-**Task 3.3**
+This allows us to import functions from a file for reuse in other projects.
 
-Then add the additional demonstrations to show that your code works correctly in each case.
+
+#### Task 6B
+
+Now edit the code in the `main` function, so that after each game 
+it asks the user:
 
 ```python
-demo4 = process_str_v2("The cat sat on the red mat.", cat="mouse")
-print(demo4)
-
-demo5 = process_str_v2("The cat sat on the red mat.", cat="flea", sat="hopped", mat="dog")
-print(demo5)
+Press enter to play again (or q to quit):  
 ```
 
-**Task 3.4**
+and use a loop to keep playing until the user quits the game. 
 
-Can you replace the two words "red mat" with "green rug" using a call to the function using a single keyword argument? 
+### Task 7 (extension)
 
-Write your answer as a Python comment.
+We can make an alternative version of the game where a player only
+gets information on how they did at the end of each round, and has
+five attempts to try to get all T/F answers correct.
 
----
+You can try this game here (Coded with AI in JavaScript and HTML):
 
-### Part 4: Creating a greetings module
+https://gemini.google.com/share/8ca9566b360d
 
-The following python code defines some functions to display greetings. 
-
-```python
-def say_hello(name):
-    print(f"Hello {name}!")
-
-def say_hi(name=None):
-    if name is None:
-        print("Hi, whoever you are!")
-    else:
-        print(f"Hi, it's good to see you {name}!")
-
-```
-
-We want to store these functions so that we can call them as python module `greetings`.
-
-**Task 4.1**
-
-Create an appropriately named python module file to do this. (e.g. click on the new file icon in the file panel toolbar).
-
-**Task 4.2**
-
-Next work in code file `5_part4.py`
-
-Show how to import the `greetings` module and call the functions it contains using appropriate code so that the file will produce the following output:
-
-```
-Hi, it's good to see you Sarah!
-Hello Fred!
-Hi, whoever you are!
-```
-
----
-
+Use Python to try to recreate the game.
